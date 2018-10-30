@@ -36,10 +36,17 @@ function questionSetup() {
 }
 
 function checkAnswer() {
+    var answerValue = triviaQuestions[currentQuestion].correct
     if ($("input[name=option]:checked").val() == triviaQuestions[currentQuestion].correct) {
         correctAnswers++;
-    };
-};
+        $("#solution-text").fadeIn(200);
+        $("#solution-text").html("Correct! Good Job!");
+
+    } else {
+        $("#solution-text").fadeIn(200);
+        $("#solution-text").html("Sorry, the correct answer was " + triviaQuestions[currentQuestion].choices[answerValue] + ".");
+    }
+}
 
 $(document).ready(function () {
 
@@ -54,20 +61,28 @@ $(document).ready(function () {
     $("#next").click(function () {
         event.preventDefault();
         checkAnswer();
-        currentQuestion++;
-        if (currentQuestion < triviaQuestions.length) {
-            questionSetup();
-            if (currentQuestion == triviaQuestions.length - 1) {
-                $('#next').html("Submit");
-                $('#next').click(function () {
-                    $(".jumbotron").hide();
-                    $("#result").html("You correctly answered " + correctAnswers + " out of " + currentQuestion + " questions! ").hide();
-                    $("#result").fadeIn(1500);
-                })
+        setTimeout(answerPause, 1000 * 3);
+        function answerPause() {
+            $("#solution-text").hide();
+            currentQuestion++;
+            if (currentQuestion < triviaQuestions.length) {
+                questionSetup();
+                if (currentQuestion == triviaQuestions.length - 1) {
+                    $('#next').html("Submit");
+                    $('#next').click(function () {
+                        checkAnswer();
+                        setTimeout(finalAnwerPause, 1000 * 3);
+                        function finalAnwerPause() {
+                            $(".jumbotron").hide();
+                            $("#result").html("You correctly answered " + correctAnswers + " out of " + currentQuestion + " questions! ").hide();
+                            $("#result").fadeIn(1500);
+                        }
+                    })
+                }
             }
         }
-    });
-});
+    })
+})
 // });
 
 // $("#start_button").click(playGame());
