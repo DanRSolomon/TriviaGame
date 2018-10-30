@@ -5,25 +5,35 @@
         <meta charset="UTF-8">
         <title>Trivia Game</title>
 
-        <link type="text/css" rel="stylesheet" href="assets/css/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <!-- Added a link to Bootstrap-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+
 
     </head>
 
     <body>
+        <h1>Space Trivia Game</h1>
+        <br />
+        <!-- <button id="start_button">Start Game</button> -->
 
-        <button id="start_button">start game</button>
-        <div id="timer"></div>
-        <div id="questions"></div>
-        <div id="answer-choices"></div>
-        <div class="correct"></div>
-        <div class="incorrect"></div>
+        <div class="jumbotron">
 
-        <script type="text/javascript" src="assets/javascript/app.js">
-        </script>
+            <div id="timer"></div>
+            <div id="questions"></div>
+            <div id="answer-choices"></div>
+            <br />
+            <a href="#" id="next" class="button">Next</a>
+            <br />
+            <div class="correct"></div>
+            <div class="incorrect"></div>
+
+       
+        </div>
+
+        <div id="result"></div>
+
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
 
     </body>
 

@@ -1,2 +1,15 @@
+body {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    font-size: 20pt;
+    width: 760px;
+    background-image: url("../images/pillarsBig.jpg");
 
+}
+
+.jumbotron {
+    width: 700;
+    opacity: 0.75;
+}
 
