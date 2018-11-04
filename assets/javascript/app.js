@@ -1,4 +1,3 @@
-// $(document).ready(function() {
 
 var triviaQuestions = [{
     question: "What's the name of the closest planet to the Sun?",
@@ -22,41 +21,68 @@ var currentQuestion = 0;
 var correctAnswers = 0;
 
 function questionSetup() {
+
     $('#questions').html(parseInt(currentQuestion) + 1 + ". " + triviaQuestions[currentQuestion].question);
     var options = triviaQuestions[currentQuestion].choices;
     var formHtml = " ";
     for (var i = 0; i < options.length; i++) {
-        formHtml += '<div><input type="radio" name="option" value="' + i + '" id="option' + i + '"><label for="option' + i + '">' +
-            triviaQuestions[currentQuestion].choices[i] + '</label></div>';
+        formHtml += '<div><input type="radio" name="option" value="' + i + '" id="option' + i + '">\
+            <label for="option' + i + '">' + triviaQuestions[currentQuestion].choices[i] + '</label></div>';
     }
 
     $('#answer-choices').html(formHtml);
     $("#option").prop('checked', true);
     console.log(options);
+
+
 }
+
+// This timer works on its own, but I could not get it to work with my 
+//  as its written. I ran out of time to rework it. I know that the code 
+//  in the "next" button function is too nested, but again, I couldn't
+//  fix it in time. 
+
+// var timeLeft = 15;
+// var timerId = setInterval(countdown, 1000);
+// function countdown() {
+//     if (timeLeft == 0) {
+//         clearTimeout(timerId);
+//         checkAnswer();
+//     } else {
+//         $("#timer").html(timeLeft + ' seconds remaining');
+//         timeLeft--;
+//     }
+
 
 function checkAnswer() {
     var answerValue = triviaQuestions[currentQuestion].correct
-    if ($("input[name=option]:checked").val() == triviaQuestions[currentQuestion].correct) {
+    if ($("input[name=option]:checked").val() == answerValue) {
         correctAnswers++;
+        $("#next").hide();
         $("#solution-text").fadeIn(200);
         $("#solution-text").html("Correct! Good Job!");
 
     } else {
+        $("#next").hide();
         $("#solution-text").fadeIn(200);
         $("#solution-text").html("Sorry, the correct answer was " + triviaQuestions[currentQuestion].choices[answerValue] + ".");
     }
 }
 
 $(document).ready(function () {
+    $(".jumbotron").hide();
 
-    // $(".jumbotron").hide();
-    // $('#start-button').click(function() {
-    //     $(".jumbotron").fadeIn();
-    //     $(this).hide();
-    // });
+    $("#start_button").click(function () {
+        $(".jumbotron").fadeIn();
+        $("#start_button").hide();
+    })
 
+    // next
+    //   checkAnswer
+    //   answerPause
+    //   questionSetup
     questionSetup();
+
 
     $("#next").click(function () {
         event.preventDefault();
@@ -64,6 +90,7 @@ $(document).ready(function () {
         setTimeout(answerPause, 1000 * 3);
         function answerPause() {
             $("#solution-text").hide();
+            $("#next").fadeIn(200);
             currentQuestion++;
             if (currentQuestion < triviaQuestions.length) {
                 questionSetup();
@@ -76,14 +103,12 @@ $(document).ready(function () {
                             $(".jumbotron").hide();
                             $("#result").html("You correctly answered " + correctAnswers + " out of " + currentQuestion + " questions! ").hide();
                             $("#result").fadeIn(1500);
+
                         }
                     })
                 }
             }
         }
     })
-})
-// });
 
-// $("#start_button").click(playGame());
-
+});

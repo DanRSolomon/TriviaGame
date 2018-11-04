@@ -13,3 +13,11 @@ body {
     opacity: 0.75;
 }
 
+#answer-choices {
+    color: green;
+}
+
+#timer {
+    color: darkorange
+}
+
